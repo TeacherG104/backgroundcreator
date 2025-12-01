@@ -6,8 +6,11 @@ import requests
 
 app = Flask(__name__)
 
-SERVICE_ACCOUNT_FILE = "background-builder-479821-c88533cc7183.json"
-SCOPES = [
+import json, os
+creds_info = json.loads(os.environ["GOOGLE_APPLICATION_CREDENTIALS_JSON"])
+creds = service_account.Credentials.from_service_account_info(
+    creds_info, scopes=SCOPES
+)
     "https://www.googleapis.com/auth/presentations",
     "https://www.googleapis.com/auth/drive"
 ]
